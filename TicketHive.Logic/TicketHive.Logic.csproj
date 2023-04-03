@@ -23,4 +23,8 @@
     <ProjectReference Include="..\TicketHive.Server\TicketHive.Server.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Managers\" />
+  </ItemGroup>
+
 </Project>

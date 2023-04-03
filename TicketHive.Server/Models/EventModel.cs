@@ -9,6 +9,7 @@
         public string? Location { get; set; }
         public decimal TicketPrice { get; set; }
         public DateTime DateTime { get; set; }
+        public string? Image { get; set; }
 
 
         public List<UserModel> Users { get; set; } = new();
