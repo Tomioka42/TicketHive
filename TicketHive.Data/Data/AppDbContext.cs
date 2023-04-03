@@ -12,9 +12,9 @@ namespace TicketHive.Data.Data
 
         }
 
-        DbSet<EventModel> Events { get; set; }
-        DbSet<UserModel> Users { get; set; }
-        DbSet<BookingModel> Bookings { get; set; }
+        public DbSet<EventModel> Events { get; set; }
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<BookingModel> Bookings { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
