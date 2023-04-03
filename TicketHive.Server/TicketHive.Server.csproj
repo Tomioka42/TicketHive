@@ -19,8 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TicketHive.Server\TicketHive.Server.csproj" />
-  </ItemGroup>
-
 </Project>

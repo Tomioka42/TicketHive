@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketHive.Ui", "TicketHive.Ui\TicketHive.Ui.csproj", "{0CA78C69-58A2-4B5E-AC2B-2BF73D88A46D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketHive.Ui", "TicketHive.Ui\TicketHive.Ui.csproj", "{0CA78C69-58A2-4B5E-AC2B-2BF73D88A46D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketHive.Data", "TicketHive.Data\TicketHive.Data.csproj", "{B050FEB0-4DFA-4822-970B-2FF597EE7A26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketHive.Logic", "TicketHive.Logic\TicketHive.Logic.csproj", "{5494FB74-3C46-457D-B04D-D001C05D220D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketHive.Logic", "TicketHive.Logic\TicketHive.Logic.csproj", "{5494FB74-3C46-457D-B04D-D001C05D220D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketHive.Server", "TicketHive.Server\TicketHive.Server.csproj", "{4E8850A3-6912-465C-8D67-5700DC2AF37B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{0CA78C69-58A2-4B5E-AC2B-2BF73D88A46D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CA78C69-58A2-4B5E-AC2B-2BF73D88A46D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CA78C69-58A2-4B5E-AC2B-2BF73D88A46D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B050FEB0-4DFA-4822-970B-2FF597EE7A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B050FEB0-4DFA-4822-970B-2FF597EE7A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B050FEB0-4DFA-4822-970B-2FF597EE7A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B050FEB0-4DFA-4822-970B-2FF597EE7A26}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5494FB74-3C46-457D-B04D-D001C05D220D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5494FB74-3C46-457D-B04D-D001C05D220D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5494FB74-3C46-457D-B04D-D001C05D220D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5494FB74-3C46-457D-B04D-D001C05D220D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8850A3-6912-465C-8D67-5700DC2AF37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8850A3-6912-465C-8D67-5700DC2AF37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8850A3-6912-465C-8D67-5700DC2AF37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8850A3-6912-465C-8D67-5700DC2AF37B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

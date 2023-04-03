@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using TicketHive.Data.Models;
+using TicketHive.Server.Models;
 
 namespace TicketHive.Ui.Data
 {

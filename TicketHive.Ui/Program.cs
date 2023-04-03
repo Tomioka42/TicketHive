@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using TicketHive.Ui.Data;
-using TicketHive.Data.Data;
+using TicketHive.Server.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
