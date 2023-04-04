@@ -45,11 +45,10 @@ namespace TicketHive.Ui.Repo
 
         public async Task<ActionResult<EventModel>> PostEvents()
         {
-            var response = await context.Events.ToListAsync();
 
             EventModel newEvent = new()
             {
-                Name = response.Name
+                Name = 
             };
         }
     }
