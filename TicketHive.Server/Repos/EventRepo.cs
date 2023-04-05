@@ -16,6 +16,7 @@ namespace TicketHive.Ui.Repo
             this.context = context;
         }
 
+        
 
         public async Task<List<EventModel>?> GetAllEvents()
         {
@@ -42,15 +43,23 @@ namespace TicketHive.Ui.Repo
             //return await context.Events.FindAsync(id);
         }
 
-        public Task<ActionResult<EventModel>> PostEvents()
+        public ActionResult<EventModel> DeleteEvent(int id)
         {
-            throw new NotImplementedException();
+            EventModel? eventToRemove = context.Events.FirstOrDefault(e => e.Id == id);
+
+            if(eventToRemove == null)
+            {
+                return null!;
+            }
+            else
+            {
+                context.Events.Remove(eventToRemove);
+                context.SaveChanges();
+
+                return eventToRemove;
+            }
         }
 
-        //public async Task<ActionResult<EventModel>> PostEvents()
-        //{
 
-
-        //}
     }
 }
