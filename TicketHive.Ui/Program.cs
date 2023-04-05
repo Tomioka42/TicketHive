@@ -8,12 +8,12 @@ using TicketHive.Server.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveDbConnection' not found.");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString, b => b.MigrationsAssembly("TicketHive.Ui")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-var connectionString2 = builder.Configuration.GetConnectionString("TicketHiveIdentityDbConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString2 = builder.Configuration.GetConnectionString("TicketHiveIdentityDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveIdentityDbConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString2));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
