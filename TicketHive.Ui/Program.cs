@@ -4,8 +4,20 @@ using System;
 using TicketHive.Ui.Data;
 using TicketHive.Server.Data;
 using TicketHive.Server.Models;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+//});
+
+//builder.Services.AddRazorPages(options =>
+//{
+//    options.Conventions.AuthorizePage("/Admin, AdminPolicy");
+//    options.Conventions.AuthorizeFolder("/Member");
+//});
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveDbConnection' not found.");
@@ -22,30 +34,44 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddRazorPages();
+
+builder.Services.AddAuthentication();
+
 
 using (var serviceProvider = builder.Services.BuildServiceProvider())
 {
     // Hämtar instanserna från DI-containern
     var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-    var signInManager = serviceProvider.GetRequiredService<SignInManager<UserModel>>();
+    var signInManager = serviceProvider.GetRequiredService<SignInManager<IdentityUser>>();
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
     //Gör detta för att säkerhetsställa att databasen är skapad, annars skapas den
     context.Database.Migrate();
 
-    UserModel? adminUser = signInManager.UserManager.FindByNameAsync("admin").GetAwaiter().GetResult();
+    IdentityUser? normalUser = signInManager.UserManager.FindByNameAsync("user").GetAwaiter().GetResult();
+
+    if(normalUser == null)
+    {
+        normalUser = new()
+        {
+            UserName = "user"
+        };
+
+        await signInManager.UserManager.CreateAsync(normalUser, "Password1234!");
+    }
+
+    IdentityUser? adminUser = signInManager.UserManager.FindByNameAsync("admin").GetAwaiter().GetResult();
 
     // Om vi inte hittar en användare med användarnamet "admin"...
     if (adminUser == null)
     {
         adminUser = new()
         {
-            Username = "admin"
+            UserName = "admin"
         };
 
 
-        signInManager.UserManager.CreateAsync(adminUser, "Password1234!");
+        await signInManager.UserManager.CreateAsync(adminUser, "Password1234!");
     }
 
     IdentityRole? adminRole = roleManager.FindByNameAsync("Admin").GetAwaiter().GetResult();

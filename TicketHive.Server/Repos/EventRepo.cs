@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using TicketHive.Server.Data;
@@ -43,13 +42,15 @@ namespace TicketHive.Ui.Repo
             //return await context.Events.FindAsync(id);
         }
 
-        public async Task<ActionResult<EventModel>> PostEvents()
+        public Task<ActionResult<EventModel>> PostEvents()
         {
-
-            EventModel newEvent = new()
-            {
-                Name = 
-            };
+            throw new NotImplementedException();
         }
+
+        //public async Task<ActionResult<EventModel>> PostEvents()
+        //{
+
+
+        //}
     }
 }
