@@ -8,7 +8,7 @@ namespace TicketHive.Ui.Repos
     {
         Task <List<EventModel>?> GetAllEvents();
 
-        Task<ActionResult<EventModel>?> GetEvent(int id);
+        ActionResult<EventModel>? GetEvent(int id);
 
         ActionResult<EventModel> DeleteEvent(int id);
     }
