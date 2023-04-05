@@ -19,6 +19,11 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.Conventions.AuthorizeFolder("/Member");
 //});
 
+
+
+// hej
+
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveDbConnection' not found.");
 builder.Services.AddDbContext<AppDbContext>(options =>
