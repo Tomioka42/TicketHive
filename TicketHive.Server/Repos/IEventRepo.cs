@@ -8,8 +8,8 @@ namespace TicketHive.Ui.Repos
     {
         Task <List<EventModel>?> GetAllEvents();
 
-        ActionResult<EventModel>? GetEvent(int id);
+        Task<ActionResult<EventModel>?> GetEvent(int id);
 
-        ActionResult<EventModel> DeleteEvent(int id);
+        Task<ActionResult<EventModel>?> DeleteEvent(int id);
     }
 }

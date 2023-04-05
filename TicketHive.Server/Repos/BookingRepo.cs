@@ -31,9 +31,9 @@ namespace TicketHive.Server.Repos
             return bookings;
         }
 
-        public ActionResult<BookingModel?> GetBooking(int id)
+        public async Task<ActionResult<BookingModel>?> GetBooking(int id)
         {
-            var reqBooking = context.Bookings.Include(b => b.User).FirstOrDefault(b => b.Id == id);
+            var reqBooking = await context.Bookings.Include(b => b.User).FirstOrDefaultAsync(b => b.Id == id);
 
             if(reqBooking == null)
             {
@@ -42,9 +42,9 @@ namespace TicketHive.Server.Repos
             return reqBooking;
         }
 
-        public ActionResult<BookingModel>? DeleteBooking(int id)
+        public async Task<ActionResult<BookingModel>?> DeleteBooking(int id)
         {
-            BookingModel? bookingToRemove = context.Bookings.FirstOrDefault(b => b.Id == id);
+            BookingModel? bookingToRemove = await context.Bookings.FirstOrDefaultAsync(b => b.Id == id);
 
             if(bookingToRemove == null)
             {

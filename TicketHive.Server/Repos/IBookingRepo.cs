@@ -11,9 +11,9 @@ namespace TicketHive.Server.Repos
     public interface IBookingRepo
     {
         Task<List<BookingModel>> GetAllBookings();
-        ActionResult<BookingModel?> GetBooking(int id);
+        Task<ActionResult<BookingModel>?> GetBooking(int id);
 
-        ActionResult<BookingModel>? DeleteBooking(int id);
+        Task<ActionResult<BookingModel>?> DeleteBooking(int id);
 
     }
 }
