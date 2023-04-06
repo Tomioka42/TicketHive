@@ -8,21 +8,6 @@ using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
-//});
-
-//builder.Services.AddRazorPages(options =>
-//{
-//    options.Conventions.AuthorizePage("/Admin, AdminPolicy");
-//    options.Conventions.AuthorizeFolder("/Member");
-//});
-
-
-
-
-
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveDbConnection' not found.");
