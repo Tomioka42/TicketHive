@@ -1,0 +1,71 @@
+﻿@page
+@model TicketHive.Ui.Pages.LoginpageModel
+@{
+}
+
+<head>
+    <title>Log in Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbe89c;
+        }
+
+        .login-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin-right: 20px;
+        }
+
+            .login-form input[type=text],
+            .login-form input[type=password] {
+                padding: 10px;
+                margin-bottom: 20px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .login-form input[type=submit] {
+                background-color: #305076;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form" method="post">
+            <h2>Log in</h2>
+
+
+            <label for="input-username">Username:</label>
+            <input id="input-username" type="text" asp-for="Username" placeholder="Username..." />
+            <label for="input-password">Password:</label>
+
+            <input id="input-password" type="password" asp-for="Password" placeholder="Password..." />
+            <a href="~/RegisterPage">Don't have an accout? Register here</a>
+            <input type="submit" value="Log in" />
+            <div>
+                <span class="text-danger" asp-validation-for="Username"></span>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+        </form>
+
+        <div class="login-image">
+            <img style="height: 500px" src="~/logos/black.png" />
+        </div>
+    </div>
+</body>
