@@ -16,7 +16,10 @@ namespace TicketHive.Ui.Repo
             this.context = context;
         }
 
-        
+        /// <summary>
+        /// Hämtar alla Events och lägger dom i en lista Asyncront.
+        /// </summary>
+        /// <returns></returns>
 
         public async Task<List<EventModel>?> GetAllEvents()
         {
@@ -29,7 +32,11 @@ namespace TicketHive.Ui.Repo
             return events;
         }
 
-
+        /// <summary>
+        /// Hämtar ett specifik event med ett angivet Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ActionResult<EventModel>?> GetEvent(int id)
         {
             var reqEvent = await context.Events.Include(e => e.Users).FirstOrDefaultAsync(e => e.Id == id);
@@ -40,8 +47,13 @@ namespace TicketHive.Ui.Repo
             }
             return reqEvent;
 
-            //return await context.Events.FindAsync(id);
         }
+
+        /// <summary>
+        /// Tar bort ett Event med hjälp av ett Id som Admin anger.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         public async Task<ActionResult<EventModel>?> DeleteEvent(int id)
         {
