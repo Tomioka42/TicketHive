@@ -1,4 +1,88 @@
 ﻿@page
+
 @model TicketHive.Ui.Pages.HomepageModel
 @{
 }
+
+<style>
+    .card {
+        display: inline-block;
+        margin: 10px;
+        background-color: #305076;
+        color: white;
+    }
+
+    .card-cotainer {
+        display: flex;
+        justify-content: center
+    }
+
+    body {
+        background-color: #fbe89c;
+        color: #305076;
+    }
+
+    #Boo {
+        background-color: white;
+    }
+
+        #Boo:hover {
+            background-color: #198754;
+        }
+
+    #Det {
+        background-color: white;
+    }
+
+        #Det:hover {
+            background-color: #0d6efd;
+        }
+
+    .card-img-top {
+        padding: 5px;
+        border-top-left-radius: 4%;
+        border-top-right-radius: 4%;
+    }
+</style>
+
+<h1>Homepage</h1>
+<div class="row">
+    <div class="col-md-12">
+        <input type="text" id="search-input" placeholder="Search for an Event...">
+    </div>
+</div>
+<h4>Popular Events</h4>
+
+
+
+
+
+
+<div class="card-cotainer">
+
+    @foreach (var obj in Model.Events.Where(o => o.Id >= 1 && o.Id <= 4))
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="~/eventimages/image-7.jpg" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@obj.Name</h5>
+                <p class="card-text">Price: @obj.TicketPrice</p>
+                <p class="card-text">City: @obj.Location</p>
+                <a href="#" id="Boo" class="btn btn-outline-dark">Book</a>
+                <a href="#" id="Det" class="btn btn-outline-dark">Details</a>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<h4>My Bookings:</h4>
+
+<ul class="list-group">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+    <li class="list-group-item">A fourth item</li>
+    <li class="list-group-item">And a fifth one</li>
+</ul>

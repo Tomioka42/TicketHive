@@ -5,8 +5,12 @@ using TicketHive.Ui.Data;
 using TicketHive.Server.Data;
 using TicketHive.Server.Models;
 using Azure.Identity;
+using TicketHive.Ui.Repo;
+using TicketHive.Ui.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<IEventRepo, EventRepo>();
 
 builder.Services.AddAuthorization(options =>
 {
@@ -30,7 +34,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString2));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
