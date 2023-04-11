@@ -12,6 +12,8 @@ namespace TicketHive.Ui.Pages
             _logger = logger;
         }
 
+        // En kommentar från Filip
+
         public void OnGet()
         {
 
