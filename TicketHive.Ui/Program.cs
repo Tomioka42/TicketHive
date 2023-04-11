@@ -7,10 +7,12 @@ using TicketHive.Server.Models;
 using Azure.Identity;
 using TicketHive.Ui.Repo;
 using TicketHive.Ui.Repos;
+using TicketHive.Server.Repos;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IEventRepo, EventRepo>();
+builder.Services.AddScoped<IBookingRepo, BookingRepo>();
 
 builder.Services.AddAuthorization(options =>
 {
