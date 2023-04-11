@@ -50,7 +50,7 @@ using (var serviceProvider = builder.Services.BuildServiceProvider())
 
     IdentityUser? normalUser = signInManager.UserManager.FindByNameAsync("user").GetAwaiter().GetResult();
 
-    if(normalUser == null)
+    if (normalUser == null)
     {
         normalUser = new()
         {
