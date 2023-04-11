@@ -1,0 +1,71 @@
+﻿@page
+@model TicketHive.Ui.Pages.RegisterpageModel
+@{
+}
+
+<head>
+    <title>Register Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fbe89c;
+        }
+
+        .register-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin-right: 20px;
+        }
+
+            .register-form input[type=text],
+            .register-form input[type=email],
+            .register-form input[type=password] {
+                padding: 10px;
+                margin-bottom: 20px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .register-form input[type=submit] {
+                background-color: #305076;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <form class="register-form" method="post">
+            <h2>Register</h2>
+            <label for="Username">Username:</label>
+            <input type="text" id="Username" palceholder="Username..." asp-for="@Model.Username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Password..." asp-for="@Model.Password">
+            <div>
+                <span class="text-danger" asp-validation-for="Username"></span>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+
+            <a href="~/LogInPage">Allredy have an account? Log in</a>
+
+            <input type="submit" value="Register">
+        </form>
+        <div class="register-image">
+            <img style="height: 500px" src="~/logos/black.png" />
+        </div>
+    </div>
+</body>
