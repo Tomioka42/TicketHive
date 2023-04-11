@@ -28,7 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Display\" />
+
+    <Folder Include="Pages\Member\" />
+    <Folder Include="Pages\Admin\" />
+
   </ItemGroup>
 
 </Project>

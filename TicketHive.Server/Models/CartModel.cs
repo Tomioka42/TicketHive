@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TicketHive.Server.Models
+{
+    public class CartModel
+    {
+        public List<CartItemModel> CartItems { get; set; }
+    }
+}

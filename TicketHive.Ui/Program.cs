@@ -8,21 +8,16 @@ using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
-//});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+});
 
-//builder.Services.AddRazorPages(options =>
-//{
-//    options.Conventions.AuthorizePage("/Admin, AdminPolicy");
-//    options.Conventions.AuthorizeFolder("/Member");
-//});
-
-
-
-// hej
-
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizePage("/AdminPage, AdminPolicy");
+    options.Conventions.AuthorizeFolder("/Member");
+});
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveDbConnection' not found.");
@@ -55,7 +50,7 @@ using (var serviceProvider = builder.Services.BuildServiceProvider())
 
     IdentityUser? normalUser = signInManager.UserManager.FindByNameAsync("user").GetAwaiter().GetResult();
 
-    if(normalUser == null)
+    if (normalUser == null)
     {
         normalUser = new()
         {

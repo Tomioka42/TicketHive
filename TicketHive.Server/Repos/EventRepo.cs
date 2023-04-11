@@ -16,6 +16,10 @@ namespace TicketHive.Ui.Repo
             this.context = context;
         }
 
+        /// <summary>
+        /// Hämtar alla Events och lägger dom i en lista Asyncront.
+        /// </summary>
+        /// <returns></returns>
 
         public async Task<List<EventModel>?> GetAllEvents()
         {
@@ -28,10 +32,14 @@ namespace TicketHive.Ui.Repo
             return events;
         }
 
-
+        /// <summary>
+        /// Hämtar ett specifik event med ett angivet Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ActionResult<EventModel>?> GetEvent(int id)
         {
-            var reqEvent = await context.Events.FindAsync(id);
+            var reqEvent = await context.Events.Include(e => e.Users).FirstOrDefaultAsync(e => e.Id == id);
 
             if(reqEvent == null)
             {
@@ -39,18 +47,31 @@ namespace TicketHive.Ui.Repo
             }
             return reqEvent;
 
-            //return await context.Events.FindAsync(id);
         }
 
-        public Task<ActionResult<EventModel>> PostEvents()
+        /// <summary>
+        /// Tar bort ett Event med hjälp av ett Id som Admin anger.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+
+        public async Task<ActionResult<EventModel>?> DeleteEvent(int id)
         {
-            throw new NotImplementedException();
+            EventModel? eventToRemove = await context.Events.FirstOrDefaultAsync(e => e.Id == id);
+
+            if(eventToRemove == null)
+            {
+                return null;
+            }
+            else
+            {
+                context.Events.Remove(eventToRemove);
+                context.SaveChanges();
+
+                return eventToRemove;
+            }
         }
 
-        //public async Task<ActionResult<EventModel>> PostEvents()
-        //{
 
-
-        //}
     }
 }

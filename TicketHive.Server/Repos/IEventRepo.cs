@@ -10,6 +10,6 @@ namespace TicketHive.Ui.Repos
 
         Task<ActionResult<EventModel>?> GetEvent(int id);
 
-        Task<ActionResult<EventModel>> PostEvents();
+        Task<ActionResult<EventModel>?> DeleteEvent(int id);
     }
 }

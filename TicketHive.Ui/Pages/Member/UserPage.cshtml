@@ -1,0 +1,22 @@
+﻿@page
+@model TicketHive.Ui.Pages.Member.UserPageModel
+@{
+}
+
+<form method="POST">
+
+    <h2 class="mt-16">Update password</h2>
+    <div class="form-floating mb-3">
+        <input type="text" name="password" class="form-control" id="password" placeholder="Password">
+        <label for="password">Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" name="confirm_password" class="form-control" id="confirm_password" placeholder="Confirm password">
+        <label for="confirm_password">Confirm password</label>
+    </div>
+
+    <div class="form-group mt-2">
+        <button class="btn btn-primary" type="submit">Update</button>
+    </div>
+
+</form>
