@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketHive.Ui", "TicketHive
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketHive.Logic", "TicketHive.Logic\TicketHive.Logic.csproj", "{5494FB74-3C46-457D-B04D-D001C05D220D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketHive.Server", "TicketHive.Server\TicketHive.Server.csproj", "{4E8850A3-6912-465C-8D67-5700DC2AF37B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketHive.Server", "TicketHive.Server\TicketHive.Server.csproj", "{4E8850A3-6912-465C-8D67-5700DC2AF37B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

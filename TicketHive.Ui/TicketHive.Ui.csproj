@@ -27,4 +27,8 @@
     <ProjectReference Include="..\TicketHive.Logic\TicketHive.Logic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Display\" />
+  </ItemGroup>
+
 </Project>
