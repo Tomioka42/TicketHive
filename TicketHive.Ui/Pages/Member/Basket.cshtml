@@ -1,78 +1,56 @@
 ﻿@page
 @model TicketHive.Ui.Pages.Basket
-@{
-}
 
 <h1>Cart</h1>
 
-
-<div class="card">
-    <div class="card-body p-4">
-
-        <div class="row">
-
-            <div class="col">
-                <h5 class="mb-3">
-                    <a href="#!" class="text-body">
-                        <i class="fas fa-long-arrow-alt-left me-2"></i>Back to booking
-                    </a>
-                </h5>
-                <hr>
-                @if (Model.Cart != null && Model.Cart.CartItems != null)
-                {
-                        var i = 0;
-                    
-                    @foreach (var cartItem in Model.Cart.CartItems)
-                    {
-                        <div class="card">
-                            <div class="card-body">
-                                <form method="post">
-                                    <input type="hidden" name="item_index" value="@i" />
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <div>
-                                                @*<img src=".."
-                                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">*@
-                                            </div>
-                                            <div class="ms-3">
-                                                <h5>@cartItem.EventName</h5>
-                                                <p class="small mb-0">Music</p>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex" style="width: 100px;">
-                                                <button type="submit" name="action" value="decrease"  class="btn px-2">
-                                                    <span>-</span>
-                                                </button>
-                                                <input id="form1" min="0" name="quantity" onchange="this.form.submit()"  value="1" type="number"
-                                                class="form-control form-control-sm" />
-
-                                                <button type="submit" name="action" value="increase" class="btn px-2">
-                                                    <span>+</span>
-                                                </button>
-                                            </div>
-                                            <div style="width: 80px;">
-                                                <h5 class="mb-0">@(
-                                               cartItem.Quantity * cartItem.Price
-                                               ) kr</h5>
-                                            </div>
-                                            <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
-                                        </div>
-
-                                    </div>
-                                </form>
+@if (Model.Cart != null && Model.Cart.CartItems != null && Model.Cart.CartItems.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cart.CartItems)
+            {
+                <tr>
+                    <td>@item.EventName</td>
+                    <td>
+                        <form method="post">
+                            <div class="input-group">
+                                <input type="hidden" name="item_index" value="@Model.Cart.CartItems.IndexOf(item)" />
+                                <input type="number" name="quantity" value="@item.Quantity" class="form-control" />
+                                <button type="submit" name="action" value="increase" class="btn btn-secondary">+</button>
+                                <button type="submit" name="action" value="decrease" class="btn btn-secondary">-</button>
+                                <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
                             </div>
-                        </div>
-                        i++;
-                    }
-                }
-                <button type="button" class="btn btn-primary">
-                    Pay now
-                </button>
+                        </form>
+                    </td>
+                    <td>@item.Price kr</td>
+                    <td>@(item.Quantity * item.Price) kr</td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end">Total:</td>
+                <td>@*@Model.Cart.TotalAmount*@ kr</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
 
-            </div>
-
-        </div>
-
-    </div>
+<div class="text-end">
+    <a href="/checkout" class="btn btn-primary">Pay Now</a>
 </div>
