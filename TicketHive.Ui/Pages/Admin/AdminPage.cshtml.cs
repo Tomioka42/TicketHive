@@ -32,6 +32,10 @@ namespace TicketHive.Ui.Pages
             this.repo = repo;
         }
 
+        /// <summary>
+        /// Ger Events propertien alla events som finns i databasen
+        /// </summary>
+        /// <returns></returns>
         public async Task OnGet()
         {
 
@@ -41,6 +45,10 @@ namespace TicketHive.Ui.Pages
             
         }
 
+        /// <summary>
+        /// Lägger till ett nytt event och sparar den i databasen
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAddAsync()
         {
             NewEvent.DateTime =  DateTime.Parse(NewDate+" "+NewTime, null, System.Globalization.DateTimeStyles.RoundtripKind);
@@ -63,6 +71,10 @@ namespace TicketHive.Ui.Pages
             return Page();
         }
 
+        /// <summary>
+        /// Tar bort önskade event från databasen
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostDeleteAsync()
         {
             await repo.DeleteEvent(EventId);
