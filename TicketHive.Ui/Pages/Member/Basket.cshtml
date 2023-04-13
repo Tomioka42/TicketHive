@@ -3,6 +3,62 @@
 
 <h1>Cart</h1>
 
+<style>
+
+    body{
+        background-color: #fbe89c;
+        color: #305076;
+    }
+
+    #btnBack{
+        display: inline-block;
+        outline: 0;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 2px solid #305076;
+        color: #305076;
+        background: 0 0;
+        padding: 8px;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+        font-weight: 600;
+        font-size: 16px;
+        height: 50px;
+        width: 150px;
+        margin-top: 10px;
+    }
+
+    #btnPay {
+        display: inline-block;
+        outline: 0;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 2px solid #fbe89c;
+        color: #fbe89c;
+        background: #305076;
+        padding: 8px;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+        font-weight: 600;
+        font-size: 16px;
+        height: 50px;
+        width: 150px;
+        margin-top: 10px;
+    }
+
+    #btnPay:hover {
+        background-color: #223854;
+        color: #fbe89c;
+    }
+
+    #btnBack:hover {
+        background-color: #305076;
+        color: #fbe89c;
+    }
+    
+    
+
+
+</style>
+
 @if (Model.Cart != null && Model.Cart.CartItems != null && Model.Cart.CartItems.Count > 0)
 {
     <table class="table table-striped">
@@ -52,9 +108,9 @@ else
 }
 
 <div class="text-end">
-    <a href="/checkout" class="btn btn-primary">Pay Now</a>
+    <a href="/checkout" id="btnPay" class="btn">Pay Now</a>
 </div>
 
 <form>
-    <button type="submit" formaction="/BookingPage">Back to Booking</button>
+    <button type="submit" id="btnBack" formaction="/BookingPage">Back to Booking</button>
 </form>
