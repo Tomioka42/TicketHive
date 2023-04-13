@@ -25,6 +25,12 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizeFolder("/Member");
 });
 
+builder.Services.AddSession(options => 
+{ 
+    options.Cookie.Name = "ShoppingCart";
+    options.Cookie.MaxAge = TimeSpan.FromDays(7);
+});
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("TicketHiveDbConnection") ?? throw new InvalidOperationException("Connection string 'TicketHiveDbConnection' not found.");
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -56,7 +62,7 @@ using (var serviceProvider = builder.Services.BuildServiceProvider())
 
     IdentityUser? normalUser = signInManager.UserManager.FindByNameAsync("user").GetAwaiter().GetResult();
 
-    if(normalUser == null)
+    if (normalUser == null)
     {
         normalUser = new()
         {
@@ -116,6 +122,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 

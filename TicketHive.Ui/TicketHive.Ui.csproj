@@ -28,8 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+
     <Folder Include="Pages\Member\" />
     <Folder Include="Pages\Admin\" />
+
   </ItemGroup>
 
 </Project>

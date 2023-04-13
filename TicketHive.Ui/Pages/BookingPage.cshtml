@@ -1,0 +1,144 @@
+﻿@page
+@using TicketHive.Server.Data
+@inject AppDbContext _context
+@model TicketHive.Ui.Pages.Display.BookingPageModel
+@{
+}
+
+
+
+<div class="row">
+    <style>
+        #search-input {
+            width: 100%;
+            max-width: 800px;
+            height: 40px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="text" id="search-input" placeholder="Search for an Event...">
+        </div>
+        <hr />
+       
+    </div>
+
+    
+
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group mr-2" role="group">
+            <button type="button" class="btn btn-primary btn-sm" onclick="sortByPrice()">Sort by Price</button>
+        </div>
+       @* <div class="btn-group mr-2" role="group">
+            <button type="button" class="btn btn-primary btn-sm" onclick="sortByDate()">Sort by Date</button>
+        </div>
+        *@
+    </div>
+
+    
+    <div class="card-container row">
+        <form id="booking-form" method="post">
+        @foreach (var eventModel in Model.Events)
+        {
+            <div class="col-md-3">
+                <div class="card mb-3 @((eventModel.IsSoldOut) ? "sold-out" : "")">
+                    <img src="~/EventImages/@eventModel.Image" class="card-img-top img-thumbnail" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@eventModel.Name</h5>
+                        <p class="card-text">@eventModel.EventType</p>
+                        <p class="card-text">@eventModel.DateTime</p>
+                        <p class="card-text">@eventModel.Location</p>
+                        <p class="card-text">@eventModel.TicketPrice SEK </p>
+                        <div class="text-center">
+                            <a href="@Url.Page("EventPage", new { id = eventModel.Id })" class="btn btn-primary">Details</a>
+                            @if (!eventModel.IsSoldOut)
+                            {
+                                    <input id="event-input" hidden asp-for="EventId" />
+                                    <button class="btn btn-success" onclick="addToCart(@eventModel.Id)">Add To Cart</button>
+                          
+                            }
+                            else
+                            {
+                                <button class="btn btn-secondary" disabled>Sold Out</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        </form>
+    </div>
+
+</div>
+
+
+
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const cards = document.querySelectorAll('.card');
+
+        searchInput.addEventListener('input', (event) => {
+            const searchTerm = event.target.value.toLowerCase();
+
+            cards.forEach((card) => {
+                const eventName = card.querySelector('.card-title').textContent.toLowerCase();
+                const eventType = card.querySelector('.card-text:nth-child(2)').textContent.toLowerCase();
+                const eventDate = card.querySelector('.card-text:nth-child(3)').textContent.toLowerCase();
+                const eventLocation = card.querySelector('.card-text:nth-child(4)').textContent.toLowerCase();
+                const eventPrice = card.querySelector('.card-text:nth-child(5)').textContent.toLowerCase();
+
+                if (eventName.includes(searchTerm) ||
+                    eventType.includes(searchTerm) ||
+                    eventDate.includes(searchTerm) ||
+                    eventLocation.includes(searchTerm) ||
+                    eventPrice.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+    function sortByPrice() {
+        const cards = document.querySelectorAll('.card');
+        const cardArray = Array.from(cards);
+        cardArray.sort((a, b) => {
+            const priceA = parseInt(a.querySelector('.card-text:nth-child(5)').textContent);
+            const priceB = parseInt(b.querySelector('.card-text:nth-child(5)').textContent);
+            return priceA - priceB;
+        });
+        const cardContainer = document.querySelector('.card-container');
+        cardContainer.innerHTML = '';
+        cardArray.forEach(card => cardContainer.appendChild(card));
+    }
+
+    function sortByDate() {
+        const cards = document.querySelectorAll('.card');
+        const cardArray = Array.from(cards);
+        cardArray.sort((a, b) => {
+            const dateA = new Date(a.querySelector('.card-text:nth-child(3)').textContent);
+            const dateB = new Date(b.querySelector('.card-text:nth-child(3)').textContent);
+            return dateA.getTime() - dateB.getTime();
+        });
+        const cardContainer = document.querySelector('.row');
+        cardContainer.innerHTML = '';
+        cardArray.forEach(card => cardContainer.appendChild(card));
+    }
+    function addToCart(eventId) {
+        document.querySelector("#event-input").value = eventId;
+        document.querySelector("#booking-form").submit();
+                    
+        //// redirect to the "/member/basket" page
+        //window.location.href = "/member/basket";
+    }
+
+
+   
+    </script>

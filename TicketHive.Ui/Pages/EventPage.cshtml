@@ -1,0 +1,65 @@
+﻿@page "{id:int}"
+@model TicketHive.Ui.Pages.EventPageModel
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@Model.Event.Name</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @*<img src="~/EventImages/@Model.Event.Image" class="card-img-top img-thumbnail" alt="...">*@
+            <img src="~/EventImages/@Model.Event.Image" class="card-img-top img-thumbnail @if (Model.Event.IsSoldOut) {
+            <text>sold-out-image</text>
+ }" alt="...">
+        </div>
+        <div class="col-md-8">
+            <p>@Model.Event.EventType</p>
+            <p>@Model.Event.DateTime</p>
+            <p>@Model.Event.Location</p>
+            <p>@Model.Event.TicketPrice SEK</p>
+            
+            
+
+            @if (!Model.Event.IsSoldOut)
+            {
+                <button class="btn btn-success" onclick="addToCart(@Model.Event.Id)">Add To Cart</button>
+            }
+            else
+            {
+                <button class="btn btn-secondary" disabled>Sold Out</button>
+            }
+
+        </div>
+    </div>
+</div>
+
+@*<form>
+    <button type="submit" formaction="/Index">Add To Basket</button>
+</form>*@
+<hr />
+<form>
+    <button type="submit" formaction="/Index">Back to HomePage</button>
+</form>
+
+<style>
+    button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button:hover {
+            background-color: #0069d9;
+        }
+</style>

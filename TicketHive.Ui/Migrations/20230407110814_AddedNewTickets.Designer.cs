@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketHive.Server.Data;
 
@@ -11,9 +12,11 @@ using TicketHive.Server.Data;
 namespace TicketHive.Ui.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230407110814_AddedNewTickets")]
+    partial class AddedNewTickets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,7 +114,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Music festival",
                             GuestCapacity = 35000,
-                            Image = "Image10.jpg",
+                            Image = "Image1.jpg",
                             Location = "Sölvesborg",
                             Name = "Sweden Rock",
                             TicketPrice = 600m,
@@ -124,7 +127,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 4, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Music festival",
                             GuestCapacity = 125000,
-                            Image = "Image7.jpg",
+                            Image = "Image10.jpg",
                             Location = "Indio, California",
                             Name = "Coachella Music Festival",
                             TicketPrice = 429.99m,
@@ -150,12 +153,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Art festival",
                             GuestCapacity = 70000,
-                            Image = "Image3.jpg",
+                            Image = "Image7.jpg",
                             Location = "Black Rock City, Nevada",
                             Name = "Burning Man",
                             TicketPrice = 475m,
                             TicketsSold = 0,
-                            TotalTickets = 5
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -163,12 +166,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Entertainment convention",
                             GuestCapacity = 135000,
-                            Image = "Image1.jpg",
+                            Image = "Image3.jpg",
                             Location = "San Diego, California",
                             Name = "San Diego Comic-Con",
                             TicketPrice = 150m,
                             TicketsSold = 0,
-                            TotalTickets = 100
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -176,12 +179,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2026, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Sports event",
                             GuestCapacity = 2500,
-                            Image = "Image4.jpg",
+                            Image = "Image5.jpg",
                             Location = "Beijing, China",
                             Name = "Winter Olympics",
                             TicketPrice = 250m,
                             TicketsSold = 0,
-                            TotalTickets = 15
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -189,12 +192,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Film festival",
                             GuestCapacity = 40000,
-                            Image = "Image5.jpg",
+                            Image = "Image2.jpg",
                             Location = "Cannes, France",
                             Name = "Cannes Film Festival",
                             TicketPrice = 50m,
                             TicketsSold = 0,
-                            TotalTickets = 14
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -202,12 +205,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Carnival",
                             GuestCapacity = 1000000,
-                            Image = "Image7.jpg",
+                            Image = "Image6.jpg",
                             Location = "New Orleans, Louisiana",
                             Name = "Mardi Gras",
                             TicketPrice = 300m,
                             TicketsSold = 0,
-                            TotalTickets = 90
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -215,12 +218,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Technology convention",
                             GuestCapacity = 170000,
-                            Image = "Image2.jpg",
+                            Image = "Image10.jpg",
                             Location = "Las Vegas, Nevada",
                             Name = "Consumer Electronics Show",
                             TicketPrice = 200m,
                             TicketsSold = 0,
-                            TotalTickets = 1
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -228,7 +231,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Sports event",
                             GuestCapacity = 39000,
-                            Image = "Image10.jpg",
+                            Image = "Image8.jpg",
                             Location = "London, United Kingdom",
                             Name = "Wimbledon Tennis Championships",
                             TicketPrice = 500m,
@@ -241,12 +244,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Cultural event",
                             GuestCapacity = 2000000,
-                            Image = "Image2.jpg",
+                            Image = "Image3.jpg",
                             Location = "Pamplona, Spain",
                             Name = "Running of the Bulls",
                             TicketPrice = 150m,
                             TicketsSold = 0,
-                            TotalTickets = 55
+                            TotalTickets = 0
                         },
                         new
                         {
@@ -254,12 +257,12 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2024),
                             EventType = "Sports event",
                             GuestCapacity = 40000,
-                            Image = "Image9.jpg",
+                            Image = "Image3.jpg",
                             Location = "Various cities",
                             Name = "World Series",
                             TicketPrice = 70000m,
                             TicketsSold = 0,
-                            TotalTickets = 16
+                            TotalTickets = 0
                         });
                 });
 
