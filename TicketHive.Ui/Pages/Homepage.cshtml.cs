@@ -30,5 +30,15 @@ namespace TicketHive.Ui.Pages
             Bookings = await bookingrepo.GetAllBookings();
             return Page();
         }
+
+        public IActionResult OnPost()
+        {
+            string searchInput = Request.Form["search-input"].ToString();
+
+            return RedirectToPage("/BookingPage", new
+            {
+                SearchInput = searchInput
+            });
+        }
     }
 }

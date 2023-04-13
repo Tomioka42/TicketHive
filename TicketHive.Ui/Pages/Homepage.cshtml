@@ -22,39 +22,67 @@
         color: #305076;
     }
 
-    #Boo {
-        background-color: white;
-    }
 
-        #Boo:hover {
-            background-color: #198754;
-        }
-
-    #Det {
-        background-color: white;
-    }
-
-        #Det:hover {
-            background-color: #0d6efd;
-        }
 
     .card-img-top {
         padding: 5px;
         border-top-left-radius: 4%;
         border-top-right-radius: 4%;
     }
+
+    #search-input {
+        width: 15%;
+        color: rgb(36, 35, 42);
+        font-size: 16px;
+        line-height: 20px;
+        min-height: 28px;
+        border-radius: 4px;
+        padding: 8px 16px;
+        border: 2px solid transparent;
+        box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+        background: rgb(251, 251, 251);
+        transition: all 0.1s ease 0s;
+    }
+
+        #search-input:focus {
+            border: 2px solid rgb(124, 138, 255);
+        }
+
+    #Det {
+        display: inline-block;
+        outline: 0;
+        cursor: pointer;
+        border-radius: 6px;
+        border: 2px solid #fbe89c;
+        color: #fbe89c;
+        background: 0 0;
+        padding: 8px;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 2px 4px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1.5px 0px;
+        font-weight: 600;
+        font-size: 16px;
+        height: 42px;
+    }
+
+        #Det:hover {
+            background-color: #fbe89c;
+            color: #305076;
+        }
 </style>
 
 <h1>Homepage</h1>
 <div class="row">
     <div class="col-md-12">
-        <input type="text" id="search-input" placeholder="Search for an Event...">
+        <form id="search" method="post">
+            <input type="text" id="search-input" placeholder="Search for an Event..." name="search-input">
+            <input type="submit" id="search-submit" value="Search" />
+
+        </form>
+
     </div>
 </div>
+
+<br />
 <h4>Popular Events</h4>
-
-
-
 
 
 
@@ -63,13 +91,13 @@
     @foreach (var obj in Model.Events.Where(o => o.Id >= 1 && o.Id <= 4))
     {
         <div class="card" style="width: 18rem;">
-            <img src="~/eventimages/image-7.jpg" class="card-img-top">
+            <img src="~/EventImages/@obj.Image" class="card-img-top" />
             <div class="card-body">
                 <h5 class="card-title">@obj.Name</h5>
                 <p class="card-text">Price: @obj.TicketPrice</p>
                 <p class="card-text">City: @obj.Location</p>
-                <a href="#" id="Boo" class="btn btn-outline-dark">Book</a>
-                <a href="#" id="Det" class="btn btn-outline-dark">Details</a>
+
+                <a href="@Url.Page("EventPage", new { id = obj.Id })" id="Det" class="btn btn-outline-dark">Details</a>
             </div>
         </div>
     }
@@ -80,17 +108,17 @@
 <h4>My Bookings:</h4>
 
 
-    @if(Model.Bookings == null)
+@if (Model.Bookings == null)
+{
+    <h6>No events booked</h6>
+}
+else
+{
+    @foreach (var booking in Model.Bookings)
     {
-        <h6>No events booked</h6>
-    }
-    else
-    {
-        @foreach (var booking in Model.Bookings)
-        {
         <ul class="list-group">
             <li>@booking.Name     @booking.Location</li>
         </ul>
-        }
     }
+}
     
