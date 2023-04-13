@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
+using TicketHive.Ui.Data;
 
 namespace TicketHive.Ui.Pages
 {
@@ -10,6 +11,7 @@ namespace TicketHive.Ui.Pages
     {
 
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly ApplicationDbContext context;
 
         [Required(ErrorMessage = "Username is requierd")]
         [MinLength(5, ErrorMessage = "Username must be at least 5 characters")]
@@ -18,9 +20,10 @@ namespace TicketHive.Ui.Pages
         [MinLength(6, ErrorMessage = "Password must be at least 6 characters")]
         public string? Password { get; set; }
 
-        public RegisterpageModel(SignInManager<IdentityUser> signInManager)
+        public RegisterpageModel(SignInManager<IdentityUser> signInManager, ApplicationDbContext context)
         {
             this.signInManager = signInManager;
+            this.context = context;
         }
 
         public void OnGet()
@@ -44,6 +47,8 @@ namespace TicketHive.Ui.Pages
                 //Om registreningsförsöket lyckades...
                 if (registerResult.Succeeded)
                 {
+                    context.Add(registerResult);
+                    context.SaveChanges();
                     return Redirect("/Index");
                 }
 
