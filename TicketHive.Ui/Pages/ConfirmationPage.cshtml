@@ -3,17 +3,57 @@
 
 
 
-<h1>Thank you for purchasing this event!</h1>
+<h1>Thank you for purchasing this event(s)!</h1>
 
 @*<p>Event: @Model.EventName</p>
 <p>Date: @Model.Date</p>
 <p>Price: @Model.Price</p>*@
 
+@*<h1>Thank you for your order!</h1>*@
 
+@if (Model.Cart != null && Model.Cart.CartItems != null && Model.Cart.CartItems.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cart.CartItems)
+            {
+                <tr>
+                    <td>@item.EventName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Price kr</td>
+                    <td>@(item.Quantity * item.Price) kr</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end">Total:</td>
+                @*<td>@Model.Cart.TotalAmount kr</td>*@
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <p>Your order is empty.</p>
+}
+
+
+@*<form>
+    <button type="submit" formaction="/BookingPage">Back to Booking</button>
+</form>*@
 
 
 <form>
-    <button type="submit" formaction="/BookingPage">Back to Booking</button>
+    <button type="submit" formaction="/BookingPage" onclick="resetCookies()">Back to Booking</button>
 </form>
 
 <style>
@@ -34,3 +74,33 @@
             background-color: #0069d9;
         }
 </style>
+
+
+
+
+
+
+<script>
+    function resetCookies() {
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+</script>
+
+
+
+@*<script>
+    function clearCartCookie() {
+        document.cookie = "ShoppingCart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+    window.addEventListener('load', function () {
+        var backButton = document.querySelector('form button[type="submit"]');
+        backButton.addEventListener('click', clearCartCookie);
+    });
+</script>*@
