@@ -6,12 +6,17 @@
 <form method="POST">
 
     <h2 class="mt-16">Update password</h2>
+
     <div class="form-floating mb-3">
-        <input type="text" name="password" class="form-control" id="password" placeholder="Password">
-        <label for="password">Password</label>
+        <input type="password" asp-for="OldPassword" class="form-control" placeholder="Old Password">
+        <label for="password">Old Password</label>
     </div>
     <div class="form-floating mb-3">
-        <input type="text" name="confirm_password" class="form-control" id="confirm_password" placeholder="Confirm password">
+        <input type="password" asp-for="NewPassword" class="form-control" placeholder="New Password">
+        <label for="password">New Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" asp-for="ConfirmPassword" class="form-control" placeholder="Confirm password">
         <label for="confirm_password">Confirm password</label>
     </div>
 
@@ -20,3 +25,9 @@
     </div>
 
 </form>
+
+
+@if(Model.StatusMessage != null)
+{
+    <h2 class="text-success">@Model.StatusMessage</h2>
+}
