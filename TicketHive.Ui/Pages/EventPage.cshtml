@@ -26,13 +26,14 @@
 
             @if (!Model.Event.IsSoldOut)
             {
-                <button class="btn btn-success" onclick="addToCart(@Model.Event.Id)">Add To Cart</button>
+                <form id="add-to-cart-form" asp-route-id="@Model.Event.Id" method="post">
+                     <button class="btn btn-success" type="submit">Add To Cart</button>
+                </form>
             }
             else
             {
                 <button class="btn btn-secondary" disabled>Sold Out</button>
             }
-
         </div>
     </div>
 </div>
@@ -41,9 +42,12 @@
     <button type="submit" formaction="/Index">Add To Basket</button>
 </form>*@
 <hr />
+
 <form>
     <button type="submit" formaction="/Homepage">Back to HomePage</button>
 </form>
+
+
 
 <style>
 
@@ -74,3 +78,6 @@
         color: #fbe89c;
     }
 </style>
+
+
+
