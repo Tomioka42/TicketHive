@@ -169,9 +169,9 @@
                 eventDate.includes(searchTerm) ||
                 eventLocation.includes(searchTerm) ||
                 eventPrice.includes(searchTerm)) {
-                card.style.display = 'block';
+                card.style.opacity = '1';
             } else {
-                card.style.display = 'none';
+                card.style.opacity = '0.2';
             }
         });
     });
