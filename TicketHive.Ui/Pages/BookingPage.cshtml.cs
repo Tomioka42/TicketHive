@@ -14,6 +14,7 @@ namespace TicketHive.Ui.Pages.Display
 
         [BindProperty]
         public int EventId { get; set; }
+        public string SearchInput { get; set; }
 
         public BookingPageModel(AppDbContext dbContext)
         {
@@ -22,8 +23,10 @@ namespace TicketHive.Ui.Pages.Display
 
         public List<EventModel> Events { get; set; }
 
-        public void OnGet()
+        public void OnGet(string searchInput)
         {
+            SearchInput = searchInput;
+
             Events = _dbContext.Events.ToList();
         }
 
