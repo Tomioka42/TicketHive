@@ -23,7 +23,6 @@
     }
 
 
-
     .card-img-top {
         padding: 5px;
         border-top-left-radius: 4%;
@@ -88,7 +87,7 @@
 
 <div class="card-cotainer">
 
-    @foreach (var obj in Model.Events.Where(o => o.Id >= 1 && o.Id <= 4))
+    @foreach (var obj in Model.Events.Take(4))
     {
         <div class="card" style="width: 18rem;">
             <img src="~/EventImages/@obj.Image" class="card-img-top" />

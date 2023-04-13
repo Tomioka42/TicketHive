@@ -8,7 +8,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            
             background-color: #fbe89c;
+            color: #305076;
+        }
+        h1{
+            font-weight:700;
         }
 
         .register-container {
@@ -62,7 +67,7 @@
 <body>
     <div class="register-container">
         <form class="register-form" method="post">
-            <h2>Register</h2>
+            <h1>Register</h1>
             <label for="Username">Username:</label>
             <input type="text" id="Username" palceholder="Username..." asp-for="@Model.Username">
 

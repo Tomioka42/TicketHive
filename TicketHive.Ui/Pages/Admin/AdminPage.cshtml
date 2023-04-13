@@ -3,6 +3,16 @@
 @{
 }
 
+<style>
+    body{
+        background-color: #fbe89c;
+        color: #305076;
+    }
+</style>
+
+
+
+
 <script>
 function setDeleteId(id) {
         $("#idToDelete").val(id);
@@ -13,30 +23,29 @@ function setDeleteId(id) {
     Add new event
 </button>
 
-<div class=" d-flex flex-column">
+<div class="d-flex flex-column">
 
     @foreach (var bookingEvent in Model.Events)
         {
-    <div class="card" style="width: 18rem;">
-        @*<img src="..." class="card-img-top" alt="...">*@
-        <div class="card-body">
+        <div class="card row" style="width: 18rem;">
+            @*<img src="..." class="card-img-top" alt="...">*@
+            <div class="card-body">
                 <h5 class="card-title">Event: @bookingEvent.Name</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><b>Type:</b> @bookingEvent.EventType</li>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Type:</b> @bookingEvent.EventType</li>
                 <li class="list-group-item"><b>Date:</b> @bookingEvent.DateTime</li>
                 <li class="list-group-item"><b>Location:</b> @bookingEvent.Location</li>
-            <li class="list-group-item"><b>Ticket price:</b> @bookingEvent.TicketPrice kr</li>
+                <li class="list-group-item"><b>Ticket price:</b> @bookingEvent.TicketPrice kr</li>
                 <li class="list-group-item"><b>Guest capacity:</b> @bookingEvent.GuestCapacity seats</li>
-        </ul>
-        <div class="card-body">
-                
+            </ul>
+            <div class="card-body">
                 <button type="button" class="btn btn-danger" onclick="setDeleteId(@bookingEvent.Id);" data-bs-toggle="modal" data-bs-target="#removeEventModal" >
-                Delete
-            </button>
+                    Delete
+                </button>
+            </div>
         </div>
-    </div>
-    }
+        }
 </div>
 
 
