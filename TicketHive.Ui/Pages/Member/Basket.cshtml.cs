@@ -28,9 +28,9 @@ namespace TicketHive.Ui.Pages
         public void OnGet()
         {
 
-
+            string cartItemsJson = HttpContext.Session.GetString("ShoppingCart"); // Session cookie
            
-            string cartItemsJson = Request.Cookies["ShoppingCart"];
+            //string cartItemsJson = Request.Cookies["ShoppingCart"]; // Vanlig cookie
 
             if (!string.IsNullOrEmpty(cartItemsJson))
             {
@@ -38,34 +38,28 @@ namespace TicketHive.Ui.Pages
                 Cart = JsonSerializer.Deserialize<CartModel>(cartItemsJson);
 
             }
-
-
             else
             {
                 // If the cookie doesn't exist, create a new empty cart
                 Cart = new CartModel();
                 Cart.CartItems = new List<CartItemModel>();
             }
-
-
         }
 
         public void OnPost()
         {
-            string cartItemsJson = Request.Cookies["ShoppingCart"];
+            string cartItemsJson = HttpContext.Session.GetString("ShoppingCart"); // Session cookie
+
+            //string cartItemsJson = Request.Cookies["ShoppingCart"]; // Vanlig cookie
 
             if (!string.IsNullOrEmpty(cartItemsJson))
             {
                 // Convert the JSON string to a list of cart items
                 Cart = JsonSerializer.Deserialize<CartModel>(cartItemsJson);
-
             }
-
 
             switch (Action)
             {
-
-
                 case "increase":
                     if (Cart != null && Cart.CartItems != null && CartItemIndex >= 0 && CartItemIndex < Cart.CartItems.Count)
                     {
@@ -106,9 +100,11 @@ namespace TicketHive.Ui.Pages
         private void SaveCartToCookie()
         {
             string cartItemsJson = JsonSerializer.Serialize(Cart);
-            Response.Cookies.Append("ShoppingCart", cartItemsJson);
-            Response.Redirect("/member/basket");
+                
+            HttpContext.Session.SetString("ShoppingCart", cartItemsJson); // Session cookie
 
+            //Response.Cookies.Append("ShoppingCart", cartItemsJson); // Vanlig cookie
+            Response.Redirect("/member/basket");
         }
 
     }

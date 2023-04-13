@@ -43,6 +43,7 @@
 
     
     <div class="card-container row">
+        <form id="booking-form" method="post">
         @foreach (var eventModel in Model.Events)
         {
             <div class="col-md-3">
@@ -58,7 +59,9 @@
                             <a href="@Url.Page("EventPage", new { id = eventModel.Id })" class="btn btn-primary">Details</a>
                             @if (!eventModel.IsSoldOut)
                             {
-                                <button class="btn btn-success" onclick="addToCart(@eventModel.Id)">Add To Cart</button>
+                                    <input id="event-input" hidden asp-for="EventId" />
+                                    <button class="btn btn-success" onclick="addToCart(@eventModel.Id)">Add To Cart</button>
+                          
                             }
                             else
                             {
@@ -69,6 +72,7 @@
                 </div>
             </div>
         }
+        </form>
     </div>
 
 </div>
@@ -127,6 +131,14 @@
         cardContainer.innerHTML = '';
         cardArray.forEach(card => cardContainer.appendChild(card));
     }
+    function addToCart(eventId) {
+        document.querySelector("#event-input").value = eventId;
+        document.querySelector("#booking-form").submit();
+                    
+        //// redirect to the "/member/basket" page
+        //window.location.href = "/member/basket";
+    }
+
 
    
     </script>
