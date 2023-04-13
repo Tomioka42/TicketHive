@@ -20,7 +20,7 @@ function setDeleteId(id) {
     <div class="card" style="width: 18rem;">
         @*<img src="..." class="card-img-top" alt="...">*@
         <div class="card-body">
-                <h5 class="card-title">Event @bookingEvent.Name</h5>
+                <h5 class="card-title">Event: @bookingEvent.Name</h5>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><b>Type:</b> @bookingEvent.EventType</li>
@@ -30,7 +30,8 @@ function setDeleteId(id) {
                 <li class="list-group-item"><b>Guest capacity:</b> @bookingEvent.GuestCapacity seats</li>
         </ul>
         <div class="card-body">
-                <button type="button" class="btn btn-danger" onclick="setDeleteId(@bookingEvent.Id);" data-bs-toggle="modal" data-bs-target="#removeEventModal">
+                
+                <button type="button" class="btn btn-danger" onclick="setDeleteId(@bookingEvent.Id);" data-bs-toggle="modal" data-bs-target="#removeEventModal" >
                 Delete
             </button>
         </div>
@@ -53,8 +54,8 @@ function setDeleteId(id) {
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 
-                <form asp-page-handler="Remove">
-                    <input id="idToDelete" type="hidden" name="event_id" />
+                <form asp-page-handler="Delete">
+                    <input id="idToDelete" type="hidden" name="event_id" asp-for="EventId"/>
                 <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
@@ -74,35 +75,35 @@ function setDeleteId(id) {
             <div class="modal-body">
                 <form asp-page-handler="Add">
                 <div class="form-floating mb-3">
-                        <input name="newEvent.Name" type="text" class="form-control" id="name" placeholder="Event name">
+                        <input name="newEvent.Name" type="text" class="form-control" id="name" placeholder="Event name" asp-for="NewEvent.Name">
                     <label for="name">Event name</label>
                 </div>
                 <div>
                 <div class="form-floating mb-3">
-                            <input name="newEvent.EventType" type="text" class="form-control" id="type" placeholder="Type">
+                            <input name="newEvent.EventType" type="text" class="form-control" id="type" placeholder="Type" asp-for="NewEvent.EventType">
                     <label for="type">Event type</label>
                 </div>
 
                     <div class="row">
                 <div class="form-floating mb-3 col">
-                                <input name="new_date" type="text" class="form-control" id="date" placeholder="Date">
+                                <input name="new_date" type="DateTime" class="form-control" id="date" placeholder="Date">
                     <label for="date">Date</label>
                 </div>
                 <div class="form-floating mb-3 col">
-                                <input name="new_time" type="text" class="form-control" id="time" placeholder="Time">
+                                <input name="new_time" type="DateTime" class="form-control" id="time" placeholder="Time">
                     <label for="time">Time</label>
                 </div></div>
 
                 <div class="form-floating mb-3">
-                            <input name="newEvent.Location" type="text" class="form-control" id="location" placeholder="Location">
+                            <input name="newEvent.Location" type="text" class="form-control" id="location" placeholder="Location"asp-for="NewEvent.Location">
                             <label for="location">Location</label>
                 </div>
                 <div class="form-floating mb-3">
-                            <input name="newEvent.ticketPrice" type="text" class="form-control" id="TicketPrice" placeholder="Ticket price">
+                            <input name="newEvent.ticketPrice" type="text" class="form-control" id="TicketPrice" placeholder="Ticket price" asp-for="NewEvent.TicketPrice">
                             <label for="TicketPrice">Ticket price</label>
                 </div>
                 <div class="form-floating mb-3">
-                            <input name="newEvent.GuestCapacity"  type="text" class="form-control" id="capacity" placeholder="Capacity">
+                            <input name="newEvent.GuestCapacity"  type="text" class="form-control" id="capacity" placeholder="Capacity" asp-for="NewEvent.GuestCapacity">
                             <label  for="capacity">Capacity</label>
                 </div>
             </div>

@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
+using TicketHive.Server.Data;
 using TicketHive.Server.Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -9,6 +11,7 @@ namespace TicketHive.Ui.Pages
 {
     public class Basket : PageModel
     {
+        private readonly AppDbContext context;
 
         [BindProperty]
         public CartModel? Cart { get; set; }
@@ -25,6 +28,10 @@ namespace TicketHive.Ui.Pages
         public string? Currency { get; set; }
         public CartItemModel CartItem { get; set; }
 
+        public Basket(AppDbContext context)
+        {
+            this.context = context;
+        }
         public void OnGet()
         {
 
@@ -94,6 +101,7 @@ namespace TicketHive.Ui.Pages
                     }
                     break;
             }
+            
             OnGet();
         }
 
@@ -106,6 +114,8 @@ namespace TicketHive.Ui.Pages
             //Response.Cookies.Append("ShoppingCart", cartItemsJson); // Vanlig cookie
             Response.Redirect("/member/basket");
         }
+
+        
 
     }
 }
