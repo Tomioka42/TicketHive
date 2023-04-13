@@ -224,7 +224,7 @@ namespace TicketHive.Ui.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TicketHive.Server.Models.BookingModel", b =>
+            modelBuilder.Entity("TicketHive.Data.Models.BookingModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -245,6 +245,9 @@ namespace TicketHive.Ui.Data.Migrations
                     b.Property<int>("GuestCapacity")
                         .HasColumnType("int");
 
+                    b.Property<int?>("IdentityUserModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
@@ -260,12 +263,14 @@ namespace TicketHive.Ui.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdentityUserModelId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("BookingModel");
                 });
 
-            modelBuilder.Entity("TicketHive.Server.Models.UserModel", b =>
+            modelBuilder.Entity("TicketHive.Data.Models.IdentityUserModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,13 +278,34 @@ namespace TicketHive.Ui.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Username")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("IdentityUsers");
+                });
+
+            modelBuilder.Entity("TicketHive.Data.Models.UserModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -333,16 +359,25 @@ namespace TicketHive.Ui.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TicketHive.Server.Models.BookingModel", b =>
+            modelBuilder.Entity("TicketHive.Data.Models.BookingModel", b =>
                 {
-                    b.HasOne("TicketHive.Server.Models.UserModel", "User")
+                    b.HasOne("TicketHive.Data.Models.IdentityUserModel", null)
+                        .WithMany("Bookings")
+                        .HasForeignKey("IdentityUserModelId");
+
+                    b.HasOne("TicketHive.Data.Models.UserModel", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TicketHive.Server.Models.UserModel", b =>
+            modelBuilder.Entity("TicketHive.Data.Models.IdentityUserModel", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("TicketHive.Data.Models.UserModel", b =>
                 {
                     b.Navigation("Bookings");
                 });

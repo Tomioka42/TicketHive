@@ -10,9 +10,6 @@
         public decimal TicketPrice { get; set; }
         public DateTime DateTime { get; set; }
         public string? Image { get; set; }
-        public int TotalTickets { get; set; }
-        public int TicketsSold { get; set; }
-        public bool IsSoldOut { get { return TicketsSold >= TotalTickets; } }
 
 
         public List<UserModel> Users { get; set; } = new();

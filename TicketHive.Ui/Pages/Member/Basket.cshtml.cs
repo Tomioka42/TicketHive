@@ -1,9 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Options;
-using System.Text.Json;
 using TicketHive.Server.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TicketHive.Ui.Pages
 {
@@ -20,92 +17,50 @@ namespace TicketHive.Ui.Pages
         public int CartItemQuantity { get; set; }
 
         [BindProperty(Name = "action")]
-        public string Action { get; set; }
-
-        public string? Currency { get; set; }
-        public CartItemModel CartItem { get; set; }
+        public String Action { get; set; }
 
         public void OnGet()
         {
 
-            string cartItemsJson = HttpContext.Session.GetString("ShoppingCart"); // Session cookie
-           
-            //string cartItemsJson = Request.Cookies["ShoppingCart"]; // Vanlig cookie
+            //TODO: Cart = Cart from session
 
-            if (!string.IsNullOrEmpty(cartItemsJson))
-            {
-                // Convert the JSON string to a list of cart items
-                Cart = JsonSerializer.Deserialize<CartModel>(cartItemsJson);
+            //TODO: remove below
+            Cart = new CartModel();
+            Cart.CartItems = new List<CartItemModel>();
+            CartItemModel CartItem1 = new CartItemModel();
+            CartItem1.EventName = "2pac";
+            CartItem1.EventType = "Music";
+            CartItem1.Quantity = 3;
+            CartItem1.Price = 100;
+            CartItemModel CartItem2 = new CartItemModel();
+            CartItem2.EventName = "50 cent";
+            CartItem2.EventType = "Tozz";
+            CartItem2.Quantity = 5;
+            CartItem2.Price = 250;
+            Cart.CartItems.Add(CartItem1);
+            Cart.CartItems.Add(CartItem2);
 
-            }
-            else
-            {
-                // If the cookie doesn't exist, create a new empty cart
-                Cart = new CartModel();
-                Cart.CartItems = new List<CartItemModel>();
-            }
+
         }
 
         public void OnPost()
         {
-            string cartItemsJson = HttpContext.Session.GetString("ShoppingCart"); // Session cookie
-
-            //string cartItemsJson = Request.Cookies["ShoppingCart"]; // Vanlig cookie
-
-            if (!string.IsNullOrEmpty(cartItemsJson))
-            {
-                // Convert the JSON string to a list of cart items
-                Cart = JsonSerializer.Deserialize<CartModel>(cartItemsJson);
-            }
-
             switch (Action)
             {
                 case "increase":
-                    if (Cart != null && Cart.CartItems != null && CartItemIndex >= 0 && CartItemIndex < Cart.CartItems.Count)
-                    {
-                        Cart.CartItems[CartItemIndex].Quantity++;
-                        SaveCartToCookie();
-                    }
+                    //TODO: Increase CartItemIndex quantity with 1 and update price. Then save in session
                     break;
                 case "decrease":
-                    if (Cart != null && Cart.CartItems != null && CartItemIndex >= 0 && CartItemIndex < Cart.CartItems.Count)
-                    {
-                        Cart.CartItems[CartItemIndex].Quantity--;
-
-                        if (Cart.CartItems[CartItemIndex].Quantity <= 0)
-                        {
-                            Cart.CartItems.RemoveAt(CartItemIndex);
-                        }
-                        SaveCartToCookie();
-                    }
+                    //TODO: Decrease CartItemIndex quantity with 1 and update price. Then save in session
                     break;
                 case "delete":
-                    if (Cart != null && Cart.CartItems != null && CartItemIndex >= 0 && CartItemIndex < Cart.CartItems.Count)
-                    {
-                        Cart.CartItems.RemoveAt(CartItemIndex);
-                        SaveCartToCookie();
-                    }
+                    //TODO:Delete CartItemIndex and save in session
                     break;
                 default:
-                    if (Cart != null && Cart.CartItems != null && CartItemIndex >= 0 && CartItemIndex < Cart.CartItems.Count)
-                    {
-                        Cart.CartItems[CartItemIndex].Quantity = CartItemQuantity;
-                        SaveCartToCookie();
-                    }
+                    //TODO: Set quantity of CartItemIndex to CartItemQuantity and update price. Then save in session
                     break;
             }
             OnGet();
         }
-
-        private void SaveCartToCookie()
-        {
-            string cartItemsJson = JsonSerializer.Serialize(Cart);
-                
-            HttpContext.Session.SetString("ShoppingCart", cartItemsJson); // Session cookie
-
-            //Response.Cookies.Append("ShoppingCart", cartItemsJson); // Vanlig cookie
-            Response.Redirect("/member/basket");
-        }
-
     }
 }
