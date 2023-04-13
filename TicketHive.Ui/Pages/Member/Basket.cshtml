@@ -80,7 +80,7 @@
                         <form method="post">
                             <div class="input-group">
                                 <input type="hidden" name="item_index" value="@Model.Cart.CartItems.IndexOf(item)" />
-                                <input type="number" name="quantity" value="@item.Quantity" class="form-control" />
+                                <input disabled type="number" name="quantity" value="@item.Quantity" class="form-control" />
                                 <button type="submit" name="action" value="increase" class="btn btn-secondary">+</button>
                                 <button type="submit" name="action" value="decrease" class="btn btn-secondary">-</button>
                                 <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
@@ -96,7 +96,7 @@
         <tfoot>
             <tr>
                 <td colspan="3" class="text-end">Total:</td>
-                <td>@*@Model.Cart.TotalAmount*@ kr</td>
+                    <td>@Model.Cart.CartItems.Sum(item => item.Quantity * item.Price) kr</td>
                 <td></td>
             </tr>
         </tfoot>
