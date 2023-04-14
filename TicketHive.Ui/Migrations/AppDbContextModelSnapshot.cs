@@ -33,30 +33,15 @@ namespace TicketHive.Ui.Migrations
                     b.Property<int>("AmountOfTickets")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EventType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GuestCapacity")
+                    b.Property<int>("EventId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("TicketPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EventId");
 
                     b.HasIndex("UserId");
 
@@ -124,7 +109,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 4, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Music festival",
                             GuestCapacity = 125000,
-                            Image = "Image7.jpg",
+                            Image = "Image4.jpg",
                             Location = "Indio, California",
                             Name = "Coachella Music Festival",
                             TicketPrice = 429.99m,
@@ -137,7 +122,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Beer festival",
                             GuestCapacity = 6000,
-                            Image = "Image1.jpg",
+                            Image = "Image7.jpg",
                             Location = "Munich, Germany",
                             Name = "Oktoberfest",
                             TicketPrice = 50m,
@@ -150,7 +135,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Art festival",
                             GuestCapacity = 70000,
-                            Image = "Image3.jpg",
+                            Image = "Image9.jpg",
                             Location = "Black Rock City, Nevada",
                             Name = "Burning Man",
                             TicketPrice = 475m,
@@ -163,7 +148,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Entertainment convention",
                             GuestCapacity = 135000,
-                            Image = "Image1.jpg",
+                            Image = "Image6.jpg",
                             Location = "San Diego, California",
                             Name = "San Diego Comic-Con",
                             TicketPrice = 150m,
@@ -176,7 +161,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2026, 2, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Sports event",
                             GuestCapacity = 2500,
-                            Image = "Image4.jpg",
+                            Image = "Image1.jpg",
                             Location = "Beijing, China",
                             Name = "Winter Olympics",
                             TicketPrice = 250m,
@@ -189,7 +174,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 5, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Film festival",
                             GuestCapacity = 40000,
-                            Image = "Image5.jpg",
+                            Image = "Image10.jpg",
                             Location = "Cannes, France",
                             Name = "Cannes Film Festival",
                             TicketPrice = 50m,
@@ -202,7 +187,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Carnival",
                             GuestCapacity = 1000000,
-                            Image = "Image7.jpg",
+                            Image = "Image3.jpg",
                             Location = "New Orleans, Louisiana",
                             Name = "Mardi Gras",
                             TicketPrice = 300m,
@@ -215,7 +200,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 1, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Technology convention",
                             GuestCapacity = 170000,
-                            Image = "Image2.jpg",
+                            Image = "Image4.jpg",
                             Location = "Las Vegas, Nevada",
                             Name = "Consumer Electronics Show",
                             TicketPrice = 200m,
@@ -228,7 +213,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 7, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Sports event",
                             GuestCapacity = 39000,
-                            Image = "Image10.jpg",
+                            Image = "Image1.jpg",
                             Location = "London, United Kingdom",
                             Name = "Wimbledon Tennis Championships",
                             TicketPrice = 500m,
@@ -241,7 +226,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(2024, 7, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EventType = "Cultural event",
                             GuestCapacity = 2000000,
-                            Image = "Image2.jpg",
+                            Image = "Image8.jpg",
                             Location = "Pamplona, Spain",
                             Name = "Running of the Bulls",
                             TicketPrice = 150m,
@@ -254,7 +239,7 @@ namespace TicketHive.Ui.Migrations
                             DateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified).AddTicks(2024),
                             EventType = "Sports event",
                             GuestCapacity = 40000,
-                            Image = "Image9.jpg",
+                            Image = "Image0.jpg",
                             Location = "Various cities",
                             Name = "World Series",
                             TicketPrice = 70000m,
@@ -271,39 +256,35 @@ namespace TicketHive.Ui.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("EventModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventModelId");
-
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("TicketHive.Server.Models.BookingModel", b =>
                 {
+                    b.HasOne("TicketHive.Server.Models.EventModel", "Event")
+                        .WithMany("Bookings")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TicketHive.Server.Models.UserModel", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("User");
-                });
+                    b.Navigation("Event");
 
-            modelBuilder.Entity("TicketHive.Server.Models.UserModel", b =>
-                {
-                    b.HasOne("TicketHive.Server.Models.EventModel", null)
-                        .WithMany("Users")
-                        .HasForeignKey("EventModelId");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("TicketHive.Server.Models.EventModel", b =>
                 {
-                    b.Navigation("Users");
+                    b.Navigation("Bookings");
                 });
 
             modelBuilder.Entity("TicketHive.Server.Models.UserModel", b =>

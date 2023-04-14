@@ -116,7 +116,7 @@ else
     @foreach (var booking in Model.Bookings)
     {
         <ul class="list-group">
-            <li>@booking.Name     @booking.Location</li>
+            <li>@booking.Event.Name     @booking.Event.Location</li>
         </ul>
     }
 }

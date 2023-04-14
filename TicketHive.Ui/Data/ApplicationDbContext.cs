@@ -13,7 +13,7 @@ namespace TicketHive.Ui.Data
             
         }
 
-        public DbSet<UserModel> Users { get; set; }
+        //public DbSet<UserModel> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

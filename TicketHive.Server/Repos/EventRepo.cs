@@ -39,7 +39,7 @@ namespace TicketHive.Ui.Repo
         /// <returns></returns>
         public async Task<ActionResult<EventModel>?> GetEvent(int id)
         {
-            var reqEvent = await context.Events.Include(e => e.Users).FirstOrDefaultAsync(e => e.Id == id);
+            var reqEvent = await context.Events.Include(e => e.Bookings).FirstOrDefaultAsync(e => e.Id == id);
 
             if(reqEvent == null)
             {
