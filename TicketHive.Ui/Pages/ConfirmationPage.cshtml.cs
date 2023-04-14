@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text.Json;
 using TicketHive.Server.Models;
+using TicketHive.Server.Data;
 
 namespace TicketHive.Ui.Pages
 {
@@ -35,5 +36,7 @@ namespace TicketHive.Ui.Pages
 
             HttpContext.Session.Remove("ShoppingCart");
         }
+
+
     }
 }
