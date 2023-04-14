@@ -47,8 +47,7 @@ namespace TicketHive.Ui.Pages
                 //Om registreningsförsöket lyckades...
                 if (registerResult.Succeeded)
                 {
-                    context.Add(registerResult);
-                    context.SaveChanges();
+                    
                     return Redirect("/Index");
                 }
 
