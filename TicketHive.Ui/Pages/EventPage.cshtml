@@ -11,12 +11,13 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            @*<img src="~/EventImages/@Model.Event.Image" class="card-img-top img-thumbnail" alt="...">*@
+            
             <img src="~/EventImages/@Model.Event.Image" class="card-img-top img-thumbnail @if (Model.Event.IsSoldOut) {
             <text>sold-out-image</text>
  }" alt="...">
         </div>
         <div class="col-md-8">
+            <!-- Displaying detailed info about the event -->
             <p>@Model.Event.EventType</p>
             <p>@Model.Event.DateTime</p>
             <p>@Model.Event.Location</p>
@@ -27,27 +28,28 @@
             @if (!Model.Event.IsSoldOut)
             {
                 <form id="add-to-cart-form" asp-route-id="@Model.Event.Id" method="post">
-                     <button class="btn btn-success" type="submit">Add To Cart</button>
+                    <button class="btn btn-success" type="submit">Add To Cart</button> <!-- possible to add to cart if the item is available -->
                 </form>
             }
             else
             {
-                <button class="btn btn-secondary" disabled>Sold Out</button>
+                <button class="btn btn-secondary" disabled>Sold Out</button> //button is not clickable if the event is sold out
             }
         </div>
     </div>
 </div>
 
-@*<form>
-    <button type="submit" formaction="/Index">Add To Basket</button>
-</form>*@
+
 <hr />
 
+
+<!-- Back to HomePage Button -->
 <form>
     <button type="submit" formaction="/Homepage">Back to HomePage</button>
 </form>
 
 
+<!-- Common color styling for all pages of the app -->
 
 <style>
 

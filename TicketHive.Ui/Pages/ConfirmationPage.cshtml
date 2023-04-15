@@ -2,14 +2,11 @@
 @model TicketHive.Ui.Pages.ConfirmationPageModel
 
 
-
 <h1>Thank you for purchasing this event(s)!</h1>
 
-@*<p>Event: @Model.EventName</p>
-<p>Date: @Model.Date</p>
-<p>Price: @Model.Price</p>*@
 
-@*<h1>Thank you for your order!</h1>*@
+
+<!-- Displaying order summary from CartItems -->
 
 @if (Model.Cart != null && Model.Cart.CartItems != null && Model.Cart.CartItems.Count > 0)
 {
@@ -47,10 +44,6 @@ else
 }
 
 
-@*<form>
-    <button type="submit" formaction="/BookingPage">Back to Booking</button>
-</form>*@
-
 
 <form>
     <button type="submit" formaction="/BookingPage" onclick="resetCookies()">Back to Booking</button>
@@ -80,7 +73,7 @@ else
 
 
 
-<script>
+@*<script>
     function resetCookies() {
         var cookies = document.cookie.split(";");
         for (var i = 0; i < cookies.length; i++) {
@@ -90,7 +83,7 @@ else
             document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         }
     }
-</script>
+</script>*@
 
 
 

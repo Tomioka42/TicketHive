@@ -33,7 +33,14 @@ namespace TicketHive.Ui.Pages
 
         public IActionResult OnPost(int id) 
         {
+
+            // Lägg till eventet med det bindade EventId:t i ShoppingCart-cookien
+
+            // Hämta ShoppingCart-cookien
+
             string shoppingCartJson = HttpContext.Session.GetString("ShoppingCart");
+
+            // Gör om cookie-strängen till ett Cart-objekt
 
             CartModel cart = new();
             cart.CartItems = new();
@@ -42,7 +49,11 @@ namespace TicketHive.Ui.Pages
                 cart = JsonSerializer.Deserialize<CartModel>(shoppingCartJson);
             }
 
+            // Hämta info om det klickade eventet från databasen
+
             EventModel clickedEvent = _context.Events.FirstOrDefault(e => e.Id == id);
+
+            // Skapa cookie-data från infon från det hämtade eventet
 
             if (cart!.CartItems.Any(c => c.EventId == id))
             {
