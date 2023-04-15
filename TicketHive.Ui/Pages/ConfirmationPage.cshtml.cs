@@ -34,7 +34,7 @@ namespace TicketHive.Ui.Pages
             }
 
 
-            HttpContext.Session.Remove("ShoppingCart");
+            HttpContext.Session.Remove("ShoppingCart"); //Remove session cookie aka empty the shopping cart
         }
 
 
