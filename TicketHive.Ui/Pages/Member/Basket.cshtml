@@ -106,10 +106,16 @@ else
 {
     <p>Your cart is empty.</p>
 }
-
+@if (HttpContext.Request.Query["ticketsSoldOut"] == "true")
+{
+    <span>Tickets are sold out</span>
+    
+}
+<form method="post">
 <div class="text-end">
-    <a href ="/ConfirmationPage" class="btn btn-primary" >Pay Now</a>
+        <button class="btn btn-primary" type="submit" name="action" value="pay">Pay Now</button>
 </div>
+</form>
 
 <form>
     <button type="submit" id="btnBack" formaction="/BookingPage">Back to Booking</button>
