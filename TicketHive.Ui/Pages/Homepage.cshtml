@@ -84,7 +84,9 @@
 <h4>Popular Events</h4>
 
 
-
+<!--
+    Denna kod genererar en behållare med maximalt fyra kort som representerar händelser. Varje kort innehåller en bild, evenemangsnamn, biljettpris och plats. Informationsknappen omdirigerar till en sida med mer information om evenemanget.
+-->
 <div class="card-cotainer">
 
     @foreach (var obj in Model.Events.Take(4))
@@ -107,6 +109,9 @@
 <h4>My Bookings:</h4>
 
 
+<!--
+    Denna kod visar en lista över användarens bokningar. Om användaren inte har gjort några bokningar visas ett meddelande. Annars visas en lista med bokningar, var och en med namn och plats för evenemanget.
+-->
 @if (Model.Bookings == null)
 {
     <h6>No events booked</h6>
