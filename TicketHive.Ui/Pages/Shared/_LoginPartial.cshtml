@@ -9,8 +9,14 @@
             <a style="color: #fbe89c;" class="nav-link" asp-area="" asp-page="/Member/Basket"> <img style="height:20px; width:20px;" src="~/EventImages/cart-shopping-solid.png" /></a>
     </li>
     <li class="nav-item">
-            <a class="nav-link " asp-area="" asp-page="/Member/UserPage" title="Manage" style="color: #fbe89c;">Hello @User.Identity?.Name!</a>
+            <a class="nav-link " asp-area="" asp-page="/Member/UserPage" title="Manage" style="color: #fbe89c;">Settings</a>
     </li>
+        @if (User.IsInRole("Admin"))
+        {
+    <li class="nav-item">
+        <a class="nav-link " asp-area="" asp-page="/Admin/AdminPage" title="Manage" style="color: #fbe89c;">Admin</a>
+    </li>
+        }
     <li class="nav-item">
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >
                 <button style="color: #fbe89c;" type="submit" class="nav-link btn btn-link ">Logout</button>
