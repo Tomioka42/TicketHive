@@ -1,4 +1,6 @@
-﻿namespace TicketHive.Server.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace TicketHive.Server.Models
 {
     public class BookingModel
     {
@@ -14,6 +16,6 @@
 
         // BookingModel
         public int AmountOfTickets { get; set; }
-        public UserModel? User { get; set; }
+        public String? UserId { get; set; }
     }
 }

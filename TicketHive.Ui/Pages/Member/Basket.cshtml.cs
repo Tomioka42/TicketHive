@@ -1,7 +1,13 @@
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 using System.Text.Json;
 using TicketHive.Server.Data;
 using TicketHive.Server.Models;
@@ -11,7 +17,10 @@ namespace TicketHive.Ui.Pages
 {
     public class Basket : PageModel
     {
+
         private readonly AppDbContext context;
+
+        private readonly SignInManager<IdentityUser> signInManager;
 
         [BindProperty]
         public CartModel? Cart { get; set; }
@@ -28,8 +37,9 @@ namespace TicketHive.Ui.Pages
         public string? Currency { get; set; }
         public CartItemModel CartItem { get; set; }
 
-        public Basket(AppDbContext context)
+        public Basket(SignInManager<IdentityUser> signInManager, AppDbContext context)
         {
+            this.signInManager = signInManager;
             this.context = context;
         }
         public void OnGet()
@@ -53,7 +63,7 @@ namespace TicketHive.Ui.Pages
             }
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPost()
         {
             string cartItemsJson = HttpContext.Session.GetString("ShoppingCart"); // Session cookie
 
@@ -67,6 +77,34 @@ namespace TicketHive.Ui.Pages
 
             switch (Action)
             {
+                case "pay":
+
+                    IdentityUser currentUser = await signInManager.UserManager.FindByNameAsync(HttpContext.User.Identity.Name);
+
+                    foreach (CartItemModel cartItem in Cart.CartItems)
+                    {
+                        EventModel eventModel = context.Events.Find(cartItem.EventId);
+                        if (eventModel.TotalTickets < (eventModel.TicketsSold + cartItem.Quantity))
+                        {
+                            return RedirectToPage("/member/basket", new { ticketsSoldOut = "true" });
+                        }
+                    }
+                        foreach (CartItemModel cartItem in Cart.CartItems)
+                    {
+
+                        EventModel eventModel = context.Events.Find(cartItem.EventId);
+                        BookingModel booking = new BookingModel();
+                        booking.AmountOfTickets = cartItem.Quantity;
+                        booking.UserId = currentUser.Id;
+                        booking.Event = eventModel;
+                        eventModel.TicketsSold += cartItem.Quantity;
+                        context.ChangeTracker.DetectChanges();
+
+                        context.Bookings.Add(booking);
+
+                    }
+                    context.SaveChanges();
+                    return RedirectToPage("/ConfirmationPage");
                 case "increase":
                     if (Cart != null && Cart.CartItems != null && CartItemIndex >= 0 && CartItemIndex < Cart.CartItems.Count)
                     {
@@ -101,8 +139,7 @@ namespace TicketHive.Ui.Pages
                     }
                     break;
             }
-            
-            OnGet();
+            return RedirectToPage("/member/basket");
         }
 
         private void SaveCartToCookie()
@@ -115,7 +152,7 @@ namespace TicketHive.Ui.Pages
             Response.Redirect("/member/basket");
         }
 
-        
+       
 
     }
 }

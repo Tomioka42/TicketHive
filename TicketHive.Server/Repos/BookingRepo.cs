@@ -42,7 +42,7 @@ namespace TicketHive.Server.Repos
         /// <returns></returns>
         public async Task<ActionResult<BookingModel>?> GetBooking(int id)
         {
-            var reqBooking = await context.Bookings.Include(b => b.User).FirstOrDefaultAsync(b => b.Id == id);
+            var reqBooking = await context.Bookings.Include(b => b.UserId).FirstOrDefaultAsync(b => b.Id == id);
 
             if(reqBooking == null)
             {
